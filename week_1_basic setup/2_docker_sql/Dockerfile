@@ -1,10 +1,9 @@
-FROM python:3.9-slim
+FROM python:3.9.1
 
+RUN apt-get install wget
+RUN pip install pandas sqlalchemy psycopg2
 
-# Install pandas
-RUN pip install pandas
+WORKDIR /app
+COPY ingest_data.py ingest_data.py 
 
-
-# Default command when the container starts
-ENTRYPOINT ["bash"]
-
+ENTRYPOINT [ "python", "ingest_data.py" ]
